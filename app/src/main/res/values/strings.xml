@@ -1,3 +1,19 @@
 <resources>
-    <string name="Pocket Budget">PocketBudget</string>
+    <!-- this is the App name that will be shown in the title bar -->
+    <string name="app_name">Pocket Budget</string>
+
+    <!-- added hints that will be shown inside empty of the following input fields -->
+    <string name="description_hint">Description</string>
+    <string name="amount_hint">Amount</string>
+    <string name="note_hint">Note (optional)</string>
+
+    <!--Save Button label -->
+    <string name="save_button">Save</string>
+
+    <!-- Validation messages, set from Kotlin with getString() -->
+    <string name="error_no_description">Describe the expense first</string>
+    <string name="error_bad_amount">Enter an amount above zero</string>
+
+    <!-- %1$s = the description (text), %2$.2f = the amount with 2 decimals -->
+    <string name="saved_format">Saved: %1$s · %2$.2f</string>
 </resources>

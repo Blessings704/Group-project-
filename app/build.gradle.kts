@@ -30,6 +30,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    buildFeatures {
+        viewBinding = true   // added this line that generates ActivityMainBinding so we never use findViewById,
+    // all the upper code is generated upon project creation automatically, they are existing settings.
+    }
 }
 
 dependencies {
