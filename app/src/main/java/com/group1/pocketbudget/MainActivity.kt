@@ -1,13 +1,27 @@
 package com.group1.pocketbudget
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.graphics.Color
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import com.group1.pocketbudget.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
+
+    // Lab 6: Mutable list storing saved expense items
+    private val currentExpenses = mutableListOf<Expense>()
+
+    // Lab 6: Adapter used to populate RecyclerView cards
+    private lateinit var adapter: ExpensesAdapter
+
+    // Activity launcher for opening expense detail screen
+    private lateinit var detailLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,58 +29,106 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // LAB 2 EXTEND: remember the normal text colour (read from the view, never use 0)
+        // Register detail activity launcher
+        detailLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            // Optional: Handle result from detail activity if needed
+        }
+
+        // Initialize adapter with click and straight delete long click listeners
+        adapter = ExpensesAdapter(
+            items = currentExpenses,
+            onClick = { expense ->
+                val intent = Intent(this, ExpensesDetailActivity::class.java).apply {
+                    putExtra("Expense Title", expense.title)
+                    putExtra("Expense Description", expense.body)
+                    putExtra("Expense Type", expense.category)
+                    putExtra("Expense Amount", expense.amount)
+                    putExtra("Essential Expense", expense.essential)
+                }
+                detailLauncher.launch(intent)
+            },
+            onLongClick = { expense ->
+                // Direct delete on hold down without confirmation
+                val index = currentExpenses.indexOf(expense)
+                if (index != -1) {
+                    currentExpenses.removeAt(index)
+                    adapter.notifyItemRemoved(index)
+                    adapter.notifyItemRangeChanged(index, currentExpenses.size - index)
+                    binding.statusText.text = "Deleted: ${expense.title}"
+                }
+            }
+        )
+
+        binding.expenseList.layoutManager = GridLayoutManager(this, 1)
+        binding.expenseList.adapter = adapter
+
+        // LAB 2 EXTEND: remember the normal text color
         val defaultColor = binding.statusText.currentTextColor
 
         // LAB 2 EXTEND: Food is the default category, so Recurring starts disabled
         binding.recurringCheckbox.isEnabled = false
 
-        //  Save button listner, action that takes place after you click save
+        // Save button listener
         binding.saveButton.setOnClickListener {
-
             val description = binding.descriptionInput.text.toString().trim()
+            val note = binding.noteInput.text.toString().trim()
             val amount = binding.amountInput.text.toString().trim().toDoubleOrNull()
 
-            //to check so that description must not be empty
+            // Check description is not empty
             if (description.isEmpty()) {
                 binding.statusText.text = getString(R.string.error_no_description)
                 return@setOnClickListener
             }
 
-            // this checks amount so that it must be a number and above 0.
-            // and when the text is not a number toDoubleOrNull() gives null to avoid a crash
+            // Check amount is valid and > 0
             if (amount == null || amount <= 0.0) {
                 binding.statusText.text = getString(R.string.error_bad_amount)
                 return@setOnClickListener
             }
 
-            binding.statusText.text = getString(R.string.saved_format, description, amount)
-
-            // LAB 2: show the full summary instead (overwrites the short message above)
             val category = getSelectedCategory()
+            val isEssential = binding.essentialSwitch.isChecked
+
+            // Create new expense and insert at the top (index 0)
+            val newExpense = Expense(
+                title = description,
+                body = note,
+                category = category,
+                amount = amount,
+                essential = isEssential
+            )
+            currentExpenses.add(0, newExpense)
+            adapter.notifyItemInserted(0)
+            binding.expenseList.scrollToPosition(0)
+
+            // Update status text summary
             var summary = getString(R.string.summary_format, description, category, amount)
-            if (binding.essentialSwitch.isChecked) {
+            if (isEssential) {
                 summary += " · " + getString(R.string.essential_tag)
             }
             binding.statusText.text = summary
 
-            // LAB 2: if Recurring is ticked, write a note in Logcat
+            // Log if recurring is checked
             if (binding.recurringCheckbox.isChecked) {
                 Log.i("PocketBudget", "Recurring: $description, ${"%.2f".format(amount)}")
             }
+
+            // Clear input fields for next entry
+            binding.descriptionInput.text?.clear()
+            binding.noteInput.text?.clear()
+            binding.amountInput.text?.clear()
         }
 
-        // LAB 2: listener goes on the RadioGroup, not on each button
+        // Category group listener
         binding.categoryGroup.setOnCheckedChangeListener { _, checkedId ->
             binding.statusText.text = getString(R.string.category_changed, getSelectedCategory())
 
-            // LAB 2 EXTEND: Recurring only makes sense once a non-default category is chosen
             val allowed = checkedId != R.id.radioFood
             binding.recurringCheckbox.isEnabled = allowed
             if (!allowed) binding.recurringCheckbox.isChecked = false
         }
 
-        // LAB 2: switch shows a message the moment it is flipped, and turns the text red when on
+        // Essential switch listener
         binding.essentialSwitch.setOnCheckedChangeListener { _, isChecked ->
             binding.statusText.text = if (isChecked) {
                 getString(R.string.marked_essential)
@@ -77,7 +139,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // LAB 2: finds which category is ticked and returns its name
+    // Returns selected category name
     private fun getSelectedCategory(): String {
         return when (binding.categoryGroup.checkedRadioButtonId) {
             R.id.radioTransport -> getString(R.string.category_transport)
