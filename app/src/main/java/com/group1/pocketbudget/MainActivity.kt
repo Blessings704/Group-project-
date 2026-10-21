@@ -2,6 +2,7 @@ package com.group1.pocketbudget
 
 import android.os.Bundle
 import android.util.Log
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import com.group1.pocketbudget.databinding.ActivityMainBinding
 
@@ -13,6 +14,12 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // LAB 2 EXTEND: remember the normal text colour (read from the view, never use 0)
+        val defaultColor = binding.statusText.currentTextColor
+
+        // LAB 2 EXTEND: Food is the default category, so Recurring starts disabled
+        binding.recurringCheckbox.isEnabled = false
 
         //  Save button listner, action that takes place after you click save
         binding.saveButton.setOnClickListener {
@@ -50,17 +57,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         // LAB 2: listener goes on the RadioGroup, not on each button
-        binding.categoryGroup.setOnCheckedChangeListener { _, _ ->
+        binding.categoryGroup.setOnCheckedChangeListener { _, checkedId ->
             binding.statusText.text = getString(R.string.category_changed, getSelectedCategory())
+
+            // LAB 2 EXTEND: Recurring only makes sense once a non-default category is chosen
+            val allowed = checkedId != R.id.radioFood
+            binding.recurringCheckbox.isEnabled = allowed
+            if (!allowed) binding.recurringCheckbox.isChecked = false
         }
 
-        // LAB 2: switch shows a message the moment it is flipped
+        // LAB 2: switch shows a message the moment it is flipped, and turns the text red when on
         binding.essentialSwitch.setOnCheckedChangeListener { _, isChecked ->
             binding.statusText.text = if (isChecked) {
                 getString(R.string.marked_essential)
             } else {
                 getString(R.string.not_essential)
             }
+            binding.statusText.setTextColor(if (isChecked) Color.RED else defaultColor)
         }
     }
 
