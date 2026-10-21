@@ -1,6 +1,7 @@
 package com.group1.pocketbudget
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.group1.pocketbudget.databinding.ActivityMainBinding
 
@@ -33,6 +34,43 @@ class MainActivity : AppCompatActivity() {
             }
 
             binding.statusText.text = getString(R.string.saved_format, description, amount)
+
+            // LAB 2: show the full summary instead (overwrites the short message above)
+            val category = getSelectedCategory()
+            var summary = getString(R.string.summary_format, description, category, amount)
+            if (binding.essentialSwitch.isChecked) {
+                summary += " · " + getString(R.string.essential_tag)
+            }
+            binding.statusText.text = summary
+
+            // LAB 2: if Recurring is ticked, write a note in Logcat
+            if (binding.recurringCheckbox.isChecked) {
+                Log.i("PocketBudget", "Recurring: $description, ${"%.2f".format(amount)}")
+            }
+        }
+
+        // LAB 2: listener goes on the RadioGroup, not on each button
+        binding.categoryGroup.setOnCheckedChangeListener { _, _ ->
+            binding.statusText.text = getString(R.string.category_changed, getSelectedCategory())
+        }
+
+        // LAB 2: switch shows a message the moment it is flipped
+        binding.essentialSwitch.setOnCheckedChangeListener { _, isChecked ->
+            binding.statusText.text = if (isChecked) {
+                getString(R.string.marked_essential)
+            } else {
+                getString(R.string.not_essential)
+            }
+        }
+    }
+
+    // LAB 2: finds which category is ticked and returns its name
+    private fun getSelectedCategory(): String {
+        return when (binding.categoryGroup.checkedRadioButtonId) {
+            R.id.radioTransport -> getString(R.string.category_transport)
+            R.id.radioBooks -> getString(R.string.category_books)
+            R.id.radioOther -> getString(R.string.category_other)
+            else -> getString(R.string.category_food)
         }
     }
 }
