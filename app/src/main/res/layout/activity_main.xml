@@ -73,5 +73,64 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- ===== LAB 2: category, Essential switch, Recurring checkbox ===== -->
+
+        <!-- RadioGroup: only ONE category can be picked at a time -->
+        <RadioGroup
+            android:id="@+id/categoryGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/statusText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Food is ticked by default -->
+            <RadioButton
+                android:id="@+id/radioFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/category_food" />
+
+            <RadioButton
+                android:id="@+id/radioTransport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/category_transport" />
+
+            <RadioButton
+                android:id="@+id/radioBooks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/category_books" />
+
+            <RadioButton
+                android:id="@+id/radioOther"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/category_other" />
+        </RadioGroup>
+
+        <!-- Switch: on = essential expense, off = not essential -->
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/essentialSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/essential_label"
+            app:layout_constraintTop_toBottomOf="@id/categoryGroup"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Checkbox: ticked = this expense repeats every month -->
+        <CheckBox
+            android:id="@+id/recurringCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/recurring_label"
+            app:layout_constraintTop_toBottomOf="@id/essentialSwitch"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

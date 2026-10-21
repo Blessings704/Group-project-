@@ -16,4 +16,29 @@
 
     <!-- %1$s = the description (text), %2$.2f = the amount with 2 decimals -->
     <string name="saved_format">Saved: %1$s · %2$.2f</string>
+
+    <!-- ===== LAB 2: category, Essential switch, Recurring checkbox ===== -->
+
+    <!-- Names of the 4 category radio buttons -->
+    <string name="category_food">Food</string>
+    <string name="category_transport">Transport</string>
+    <string name="category_books">Books</string>
+    <string name="category_other">Other</string>
+
+    <!-- Labels for the switch and the checkbox -->
+    <string name="essential_label">Essential</string>
+    <string name="recurring_label">Recurring every month</string>
+
+    <!-- Instant messages shown when the switch is flipped -->
+    <string name="marked_essential">Marked essential</string>
+    <string name="not_essential">Not essential</string>
+
+    <!-- %1$s = the category name, shown when a category is picked -->
+    <string name="category_changed">Category: %1$s</string>
+
+    <!-- Full summary after Save: description · category · amount -->
+    <string name="summary_format">%1$s · %2$s · %3$.2f</string>
+
+    <!-- Added to the end of the summary when Essential is on -->
+    <string name="essential_tag">ESSENTIAL</string>
 </resources>
