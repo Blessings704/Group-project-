@@ -46,4 +46,7 @@
     <!-- LAB 3: Initial and updated session total messages. -->
     <string name="session_total_initial">Spent this session: 0.00</string>
     <string name="session_total_format">Spent this session: %1$.2f</string>
+
+    <string name="flag_essential">Essential</string>
+    <string name="flag_recurring">Recurring</string>
 </resources>

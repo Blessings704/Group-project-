@@ -6,5 +6,6 @@ data class Expense(
     val body: String,
     val category: String,
     val amount: Double,
-    val essential: Boolean
+    val essential: Boolean,
+    val recurring: Boolean = false
 )

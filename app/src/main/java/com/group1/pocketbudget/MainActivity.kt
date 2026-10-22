@@ -95,7 +95,8 @@ class MainActivity : AppCompatActivity() {
                 body = note,
                 category = category,
                 amount = amount,
-                essential = isEssential
+                essential = isEssential,
+                recurring = binding.recurringCheckbox.isChecked
             )
             currentExpenses.add(0, newExpense)
             adapter.notifyItemInserted(0)
