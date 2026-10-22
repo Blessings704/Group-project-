@@ -1,7 +1,14 @@
+
 package com.group1.pocketbudget
 
-// Lab 6: Blueprint representing a saved expense
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "expenses")
 data class Expense(
+    @PrimaryKey(autoGenerate = true)
+    val expenseId: Int = 0,
+
     val title: String,
     val body: String,
     val category: String,
