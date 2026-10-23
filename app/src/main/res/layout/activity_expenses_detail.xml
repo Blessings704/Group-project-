@@ -56,5 +56,23 @@
         app:layout_constraintBottom_toBottomOf="@id/detailEssential"
         app:layout_constraintEnd_toEndOf="parent"
         />
+    <!-- Lab 5 This is all the styling for the expense list cards -->
+    <Button
+        android:id="@+id/ShareButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        />
+    <Button
+        android:id="@+id/MarkReviewedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mark as Reviewed"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        />
+
 
 </LinearLayout>

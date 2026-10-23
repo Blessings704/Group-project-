@@ -125,6 +125,8 @@
             app:layout_constraintTop_toBottomOf="@id/categoryGroup"
             app:layout_constraintStart_toStartOf="parent" />
 
+
+
         <!-- Checkbox: ticked = this expense repeats every month -->
         <CheckBox
             android:id="@+id/recurringCheckbox"
@@ -144,6 +146,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recurringCheckbox" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
