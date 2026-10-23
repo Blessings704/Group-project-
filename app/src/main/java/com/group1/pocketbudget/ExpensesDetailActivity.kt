@@ -55,15 +55,20 @@ class ExpensesDetailActivity : AppCompatActivity() {
 
         // Share the expense
         binding.shareButton.setOnClickListener {
-            val essentialText = if (essential) ", essential" else ""
+            val essentialText = if (essential) {
+                ", essential"
+            } else {
+                ", non-essential"
+            }
 
             val shareText = String.format(
                 Locale.getDefault(),
-                "%s: %.2f (%s%s)",
+                "%s: %.2f (%s%s)\n%s",
                 title,
                 amount,
                 category,
-                essentialText
+                essentialText,
+                body
             )
 
             val sendIntent = Intent(Intent.ACTION_SEND).apply {
