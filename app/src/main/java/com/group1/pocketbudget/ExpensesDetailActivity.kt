@@ -1,65 +1,103 @@
+
 package com.group1.pocketbudget
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.group1.pocketbudget.databinding.ActivityExpensesDetailBinding
+import java.util.Locale
 
 class ExpensesDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityExpensesDetailBinding
 
-    @SuppressLint("SetTextI18n")
+    companion object {
+        const val EXTRA_TITLE = "expense_title"
+        const val EXTRA_DESCRIPTION = "expense_description"
+        const val EXTRA_CATEGORY = "expense_category"
+        const val EXTRA_AMOUNT = "expense_amount"
+        const val EXTRA_ESSENTIAL = "expense_essential"
+        const val EXTRA_REVIEWED_TITLE = "reviewed_title"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityExpensesDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val title = intent.getStringExtra("Expense Title") ?: ""
-        val body = intent.getStringExtra("Expense Description") ?: ""
-        val category = intent.getStringExtra("Expense Type") ?: ""
-        val amount = intent.getDoubleExtra("Expense Amount", 0.0)
-        val essential = intent.getBooleanExtra("Essential Expense", false)
+        // Receive expense details from MainActivity
+        val title = intent.getStringExtra(EXTRA_TITLE) ?: ""
+        val body = intent.getStringExtra(EXTRA_DESCRIPTION) ?: ""
+        val category = intent.getStringExtra(EXTRA_CATEGORY) ?: ""
+        val amount = intent.getDoubleExtra(EXTRA_AMOUNT, 0.0)
+        val essential = intent.getBooleanExtra(EXTRA_ESSENTIAL, false)
 
+        // Display expense details
         binding.detailTitle.text = title
-        binding.detailCategory.text = "Category: $category"
-        binding.detailAmount.text = "Amount: $${"%.2f".format(amount)}"
-        binding.detailDescription.text = "Notes: ${body.ifEmpty { "None" }}"
-        binding.detailEssential.text = if (essential) "Essential Expense" else "Non-essential Expense"
 
-        binding.BackButton.setOnClickListener {
-            setResult(RESULT_CANCELED)// added by Leah
-            finish()
+        binding.detailCategory.text =
+            getString(R.string.detail_category_format, category)
 
+        binding.detailAmount.text =
+            getString(R.string.detail_amount_format, amount)
+
+        binding.detailDescription.text = getString(
+            R.string.detail_notes_format,
+            body.ifEmpty { getString(R.string.no_notes) }
+        )
+
+        binding.detailEssential.text = if (essential) {
+            getString(R.string.essential_expense)
+        } else {
+            getString(R.string.nonessential_expense)
         }
 
-        binding.ShareButton.setOnClickListener {
-            val shareText = "$title: ${"%.2f".format(amount)} ($category, ${
-                if (essential) "essential" else "non-essential"
-            })"
+        // Share the expense
+        binding.shareButton.setOnClickListener {
+            val essentialText = if (essential) {
+                ", essential"
+            } else {
+                ", non-essential"
+            }
 
-            val shareIntent = android.content.Intent(
-                android.content.Intent.ACTION_SEND
-            ).apply {
+            val shareText = String.format(
+                Locale.getDefault(),
+                "%s: %.2f (%s%s)\n%s",
+                title,
+                amount,
+                category,
+                essentialText,
+                body
+            )
+
+            val sendIntent = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
-                putExtra(android.content.Intent.EXTRA_TEXT, shareText)
+                putExtra(Intent.EXTRA_TEXT, shareText)
             }
 
             startActivity(
-                android.content.Intent.createChooser(
-                    shareIntent,
-                    "Share expense via"
+                Intent.createChooser(
+                    sendIntent,
+                    getString(R.string.share_chooser_title)
                 )
             )
         }
 
-        binding.MarkReviewedButton.setOnClickListener {
-            setResult(
-                RESULT_OK,
-                android.content.Intent().putExtra("reviewedTitle", title)
-            )
+        // Mark the expense as reviewed
+        binding.reviewButton.setOnClickListener {
+            val resultIntent = Intent().apply {
+                putExtra(EXTRA_REVIEWED_TITLE, title)
+            }
+
+            setResult(RESULT_OK, resultIntent)
             finish()
         }
 
+        // Return a cancelled result when Back is pressed
+        binding.backButton.setOnClickListener {
+            setResult(RESULT_CANCELED)
+            finish()
+        }
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--  scroll in landscape to avoid cutting off the screen -->
+<!-- Scroll in landscape to avoid cutting off the screen -->
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,29 +17,27 @@
             android:id="@+id/descriptionInput"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:autofillHints=""
+            android:layout_marginTop="16dp"
             android:hint="@string/description_hint"
-            android:inputType="text"
+            android:inputType="textCapSentences"
             android:minHeight="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:autofillHints=""
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
             android:id="@+id/noteInput"
             android:layout_width="0dp"
             android:layout_height="120dp"
             android:layout_marginTop="12dp"
-            android:autofillHints=""
-            android:gravity="top|start"
             android:hint="@string/note_hint"
-            android:inputType="textMultiLine"
-            android:textColorHint="#546E7A"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:inputType="textMultiLine|textCapSentences"
+            android:gravity="top|start"
+            android:autofillHints=""
+            app:layout_constraintTop_toBottomOf="@id/descriptionInput"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/descriptionInput" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
             android:id="@+id/amountInput"
@@ -47,13 +45,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
-            android:autofillHints=""
             android:hint="@string/amount_hint"
             android:inputType="numberDecimal"
             android:minHeight="48dp"
-            app:layout_constraintEnd_toStartOf="@id/saveButton"
-            app:layout_constraintStart_toStartOf="parent"
+            android:autofillHints=""
             app:layout_constraintTop_toBottomOf="@id/noteInput"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/saveButton"
             tools:ignore="VisualLintTextFieldSize" />
 
         <Button
@@ -75,20 +73,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- ===== LAB 2: category, Essential switch, Recurring checkbox ===== -->
+        <TextView
+            android:id="@+id/sessionTotalText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/session_total_initial"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/statusText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- RadioGroup: only ONE category can be picked at a time -->
         <RadioGroup
             android:id="@+id/categoryGroup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/statusText"
+            app:layout_constraintTop_toBottomOf="@id/sessionTotalText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <!-- Food is ticked by default -->
             <RadioButton
                 android:id="@+id/radioFood"
                 android:layout_width="wrap_content"
@@ -113,9 +118,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/category_other" />
+
         </RadioGroup>
 
-        <!-- Switch: on = essential expense, off = not essential -->
         <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/essentialSwitch"
             android:layout_width="wrap_content"
@@ -137,16 +142,29 @@
             app:layout_constraintTop_toBottomOf="@id/essentialSwitch"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <TextView
+            android:id="@+id/allTimeTotalText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/all_time_total_initial"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/recurringCheckbox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/expenseList"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:nestedScrollingEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/allTimeTotalText"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recurringCheckbox" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

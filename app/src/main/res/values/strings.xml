@@ -1,49 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- this is the App name that will be shown in the title bar -->
+    <!-- App name -->
     <string name="app_name">Pocket Budget</string>
+    <string name="detail_screen_title">Expense Details</string>
 
-    <!-- added hints that will be shown inside empty of the following input fields -->
+    <!-- Lab 1: Input fields and Save button -->
     <string name="description_hint">Description</string>
     <string name="amount_hint">Amount</string>
     <string name="note_hint">Note (optional)</string>
-
-    <!--Save Button label -->
     <string name="save_button">Save</string>
 
-    <!-- Validation messages, set from Kotlin with getString() -->
+    <!-- Validation messages -->
     <string name="error_no_description">Describe the expense first</string>
     <string name="error_bad_amount">Enter an amount above zero</string>
 
-    <!-- %1$s = the description (text), %2$.2f = the amount with 2 decimals -->
+    <!-- Saved expense message -->
     <string name="saved_format">Saved: %1$s · %2$.2f</string>
 
-    <!-- ===== LAB 2: category, Essential switch, Recurring checkbox ===== -->
-
-    <!-- Names of the 4 category radio buttons -->
+    <!-- Lab 2: Categories -->
     <string name="category_food">Food</string>
     <string name="category_transport">Transport</string>
     <string name="category_books">Books</string>
     <string name="category_other">Other</string>
 
-    <!-- Labels for the switch and the checkbox -->
+    <!-- Essential switch and recurring checkbox -->
     <string name="essential_label">Essential</string>
     <string name="recurring_label">Recurring every month</string>
-
-    <!-- Instant messages shown when the switch is flipped -->
     <string name="marked_essential">Marked essential</string>
     <string name="not_essential">Not essential</string>
-
-    <!-- %1$s = the category name, shown when a category is picked -->
     <string name="category_changed">Category: %1$s</string>
 
-    <!-- Full summary after Save: description · category · amount -->
+    <!-- Expense summary -->
     <string name="summary_format">%1$s · %2$s · %3$.2f</string>
-
-    <!-- Added to the end of the summary when Essential is on -->
     <string name="essential_tag">ESSENTIAL</string>
 
-
-    <!-- LAB 3: Initial and updated session total messages. -->
+    <!-- Lab 3: Session total -->
     <string name="session_total_initial">Spent this session: 0.00</string>
     <string name="session_total_format">Spent this session: %1$.2f</string>
+
+    <!-- Lab 7: All-time total -->
+    <string name="all_time_total_initial">All-time total: 0.00</string>
+    <string name="all_time_total_format">All-time total: %1$.2f</string>
+
+    <!-- Expense card labels -->
+    <string name="flag_essential">Essential</string>
+    <string name="flag_recurring">Recurring</string>
+    <string name="no_note_added">No note added</string>
+
+    <!-- Lab 5: Detail activity and review results -->
+    <string name="detail_category_format">Category: %1$s</string>
+    <string name="detail_amount_format">Amount: MWK %1$.2f</string>
+    <string name="detail_notes_format">Notes: %1$s</string>
+    <string name="no_notes">None</string>
+    <string name="essential_expense">Essential Expense</string>
+    <string name="nonessential_expense">Non-essential Expense</string>
+    <string name="reviewed_format">Reviewed: %1$s</string>
+    <string name="review_cancelled">Review cancelled</string>
+    <string name="review_button">Mark reviewed</string>
+    <string name="back_button">Back</string>
+    <string name="share_button">Share</string>
+    <string name="share_chooser_title">Share expense via</string>
+
+    <!-- Lab 6: List actions -->
+    <string name="expense_saved">Expense saved</string>
+    <string name="deleted_format">Deleted: %1$s</string>
 </resources>
