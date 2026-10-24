@@ -1,4 +1,3 @@
-
 package com.group1.pocketbudget
 
 import android.content.Intent
@@ -7,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.group1.pocketbudget.databinding.ActivityExpensesDetailBinding
 import java.util.Locale
 
+// Leah Lusinje, Oscar: Activity screen showing full details for a single selected expense
 class ExpensesDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityExpensesDetailBinding
@@ -20,6 +20,7 @@ class ExpensesDetailActivity : AppCompatActivity() {
         const val EXTRA_REVIEWED_TITLE = "reviewed_title"
     }
 
+    // grabs intent extras from MainActivity and hooks up share and review buttons. major glow up ;)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

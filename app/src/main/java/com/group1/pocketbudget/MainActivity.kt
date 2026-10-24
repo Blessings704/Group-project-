@@ -1,4 +1,3 @@
-
 package com.group1.pocketbudget
 
 import android.content.Intent
@@ -14,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.group1.pocketbudget.databinding.ActivityMainBinding
 
+// main activity handling user inputs, screen state, and database observation
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         private const val KEY_ESSENTIAL = "essentialSwitch"
     }
 
+    // Fyaupi Mwenelupembe, Rita Makanjira: sets up ViewBinding and hooks up all our UI listeners when activity is created. stay locked in :)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         logLifecycle("onCreate")
@@ -59,40 +60,48 @@ class MainActivity : AppCompatActivity() {
 
     // Lab 3: Activity lifecycle callbacks
 
+    // Blessings, Trevor: logs the onStart lifecycle method when the activity becomes visible
     override fun onStart() {
         super.onStart()
         logLifecycle("onStart")
     }
 
+    // Blessings, Trevor: logs the onResume lifecycle method when user starts interacting with the screen
     override fun onResume() {
         super.onResume()
         logLifecycle("onResume")
     }
 
+    // Blessings, Trevor: logs the onPause lifecycle method when activity loses focus
     override fun onPause() {
         logLifecycle("onPause")
         super.onPause()
     }
 
+    // Blessings, Trevor: logs the onStop lifecycle method when activity is no longer visible
     override fun onStop() {
         logLifecycle("onStop")
         super.onStop()
     }
 
+    // Blessings, Trevor: logs the onRestart lifecycle method when activity comes back from stopped state
     override fun onRestart() {
         super.onRestart()
         logLifecycle("onRestart")
     }
 
+    // Blessings, Trevor: logs the onDestroy lifecycle method right before activity is destroyed
     override fun onDestroy() {
         logLifecycle("onDestroy")
         super.onDestroy()
     }
 
+    // Blessings, Trevor: helper function to print lifecycle state messages to Logcat using PocketBudgetLife tag
     private fun logLifecycle(callback: String) {
         Log.d(TAG, callback)
     }
 
+    // Blessings, Trevor: saves session total and status text into bundle before rotation so nothing gets lost. keep it chill ;)
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putDouble(KEY_SESSION_TOTAL, sessionTotal)
         outState.putString(
@@ -109,6 +118,7 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
     }
 
+    // Blessings, Trevor: restores saved session state bundle after activity gets recreated on rotation
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
 
@@ -132,6 +142,7 @@ class MainActivity : AppCompatActivity() {
 
     // Lab 7: Connect the database, repository and ViewModel
 
+    // harrybanda200, PfabyGo: sets up database, repository, and ViewModel instances using custom factory. immaculate vibes
     private fun setupViewModel() {
         val database = ExpenseDatabase.getDatabase(this)
         val repository = ExpenseRepository(database.expenseDao())
@@ -157,6 +168,7 @@ class MainActivity : AppCompatActivity() {
 
     // Lab 6: Display expenses in a RecyclerView
 
+    // RTGONDWE, Jubie: sets up RecyclerView layout manager, adapter, and click/long-press listeners for expense cards
     private fun setupExpenseList() {
         adapter = ExpensesAdapter(
             currentExpenses,
@@ -209,6 +221,7 @@ class MainActivity : AppCompatActivity() {
 
     // Lab 7: Observe database changes
 
+    // harrybanda200, PfabyGo: observes LiveData from database so the RecyclerView list and all-time total update automatically
     private fun observeExpenses() {
         viewModel.allExpenses.observe(this) { expenses ->
             currentExpenses.clear()
@@ -226,6 +239,7 @@ class MainActivity : AppCompatActivity() {
 
     // Lab 3: Display the total for the current session
 
+    // Blessings, Trevor: updates the current session spent total display string
     private fun updateSessionTotal() {
         binding.sessionTotalText.text = getString(
             R.string.session_total_format,
@@ -235,6 +249,7 @@ class MainActivity : AppCompatActivity() {
 
     // Lab 5: Receive the result from ExpensesDetailActivity
 
+    // Leah Lusinje, Oscar: sets up ActivityResultLauncher to handle review feedback returned from detail screen
     private fun setupDetailLauncher() {
         detailLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -257,6 +272,7 @@ class MainActivity : AppCompatActivity() {
 
     // Lab 1 and Lab 2: Validate and save an expense
 
+    // Fyaupi Mwenelupembe, Rita Makanjira: validates user input, saves new expense via ViewModel, and resets entry form. absolute W :)
     private fun setupSaveButton() {
         binding.saveButton.setOnClickListener {
             val description =
@@ -352,6 +368,7 @@ class MainActivity : AppCompatActivity() {
 
     // Lab 2: Respond when the category changes
 
+    // Fyaupi Mwenelupembe, Rita Makanjira: listens for category radio group changes and toggles recurring checkbox rules
     private fun setupCategoryListener() {
         binding.categoryGroup.setOnCheckedChangeListener {
                 _, checkedId ->
@@ -376,6 +393,7 @@ class MainActivity : AppCompatActivity() {
 
     // Lab 2: Respond when the Essential switch changes
 
+    // Fyaupi Mwenelupembe, Rita Makanjira: updates status text and text color when essential switch is toggled
     private fun setupEssentialSwitch() {
         binding.essentialSwitch.setOnCheckedChangeListener {
                 _, isChecked ->
@@ -396,6 +414,7 @@ class MainActivity : AppCompatActivity() {
 
     // Return the selected category name from strings.xml.
 
+    // Fyaupi Mwenelupembe, Rita Makanjira: figures out which category radio button is currently checked and returns its string
     private fun getSelectedCategory(): String {
         return when (binding.categoryGroup.checkedRadioButtonId) {
             binding.radioTransport.id ->

@@ -1,4 +1,3 @@
-
 package com.group1.pocketbudget
 
 import androidx.lifecycle.LiveData
@@ -6,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
+// harrybanda200, PfabyGo: ViewModel class holding UI data and running background coroutine tasks
 class ExpenseViewModel(
     private val repository: ExpenseRepository
 ) : ViewModel() {
@@ -18,19 +18,19 @@ class ExpenseViewModel(
     val total: LiveData<Double?> =
         repository.total
 
-    // Get expenses by category
+    // fetches expenses for a specific category from the repository. totally valid
     fun getByCategory(category: String): LiveData<List<Expense>> {
         return repository.getByCategory(category)
     }
 
-    // Insert an expense in the background
+    // runs expense insertion on a background coroutine so the UI doesn't freeze
     fun insert(expense: Expense) {
         viewModelScope.launch {
             repository.insert(expense)
         }
     }
 
-    // Delete an expense in the background
+    // runs expense deletion on a background coroutine. pretty ez :)
     fun delete(expense: Expense) {
         viewModelScope.launch {
             repository.delete(expense)

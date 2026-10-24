@@ -1,8 +1,8 @@
-
 package com.group1.pocketbudget
 
 import androidx.lifecycle.LiveData
 
+// harrybanda200, PfabyGo: repository class that handles data traffic between the DAO and ViewModel
 class ExpenseRepository(
     private val expenseDao: ExpenseDao
 ) {
@@ -15,17 +15,17 @@ class ExpenseRepository(
     val total: LiveData<Double?> =
         expenseDao.getTotal()
 
-    // Get expenses belonging to a particular category
+    // grabs expenses filtered by category from the DAO. bet
     fun getByCategory(category: String): LiveData<List<Expense>> {
         return expenseDao.getByCategory(category)
     }
 
-    // Insert a new expense
+    // saves a new expense into the database through the DAO
     suspend fun insert(expense: Expense) {
         expenseDao.insert(expense)
     }
 
-    // Delete an expense
+    // deletes an expense from the database. super clutch ;)
     suspend fun delete(expense: Expense) {
         expenseDao.delete(expense)
     }

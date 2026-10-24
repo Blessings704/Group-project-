@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Scroll in landscape to avoid cutting off the screen -->
+<!-- Fyaupi Mwenelupembe, Rita Makanjira: NestedScrollView container that lets users scroll smoothly through the whole screen -->
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,11 +8,13 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
+    <!-- Fyaupi Mwenelupembe, Rita Makanjira: ConstraintLayout holding all our entry form input fields and lists -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
 
+        <!-- Fyaupi Mwenelupembe, Rita Makanjira: EditText where user types what the expense was for -->
         <EditText
             android:id="@+id/descriptionInput"
             android:layout_width="0dp"
@@ -26,6 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Fyaupi Mwenelupembe, Rita Makanjira: EditText for optional multi-line notes -->
         <EditText
             android:id="@+id/noteInput"
             android:layout_width="0dp"
@@ -39,6 +42,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Fyaupi Mwenelupembe, Rita Makanjira: EditText for entering the numeric expense amount -->
         <EditText
             android:id="@+id/amountInput"
             android:layout_width="0dp"
@@ -54,6 +58,7 @@
             app:layout_constraintEnd_toStartOf="@id/saveButton"
             tools:ignore="VisualLintTextFieldSize" />
 
+        <!-- Fyaupi Mwenelupembe, Rita Makanjira: Button that triggers validation and saves the expense -->
         <Button
             android:id="@+id/saveButton"
             android:layout_width="wrap_content"
@@ -63,6 +68,7 @@
             app:layout_constraintBottom_toBottomOf="@id/amountInput"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Fyaupi Mwenelupembe, Rita Makanjira: TextView showing status feedback and success summaries -->
         <TextView
             android:id="@+id/statusText"
             android:layout_width="0dp"
@@ -73,6 +79,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Blessings, Trevor: TextView displaying the total spent during the current session -->
         <TextView
             android:id="@+id/sessionTotalText"
             android:layout_width="0dp"
@@ -84,6 +91,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Fyaupi Mwenelupembe, Rita Makanjira: RadioGroup for selecting the expense category -->
         <RadioGroup
             android:id="@+id/categoryGroup"
             android:layout_width="0dp"
@@ -121,6 +129,7 @@
 
         </RadioGroup>
 
+        <!-- Fyaupi Mwenelupembe, Rita Makanjira: MaterialSwitch to mark an expense as essential -->
         <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/essentialSwitch"
             android:layout_width="wrap_content"
@@ -130,9 +139,7 @@
             app:layout_constraintTop_toBottomOf="@id/categoryGroup"
             app:layout_constraintStart_toStartOf="parent" />
 
-
-
-        <!-- Checkbox: ticked = this expense repeats every month -->
+        <!-- Fyaupi Mwenelupembe, Rita Makanjira: Checkbox to mark an expense as recurring monthly -->
         <CheckBox
             android:id="@+id/recurringCheckbox"
             android:layout_width="wrap_content"
@@ -142,6 +149,7 @@
             app:layout_constraintTop_toBottomOf="@id/essentialSwitch"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <!-- harrybanda200, PfabyGo: TextView displaying the persistent all-time sum total from Room database -->
         <TextView
             android:id="@+id/allTimeTotalText"
             android:layout_width="0dp"
@@ -154,6 +162,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- RTGONDWE, Jubie: RecyclerView displaying our saved expense list cards -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/expenseList"
             android:layout_width="0dp"
@@ -164,7 +173,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

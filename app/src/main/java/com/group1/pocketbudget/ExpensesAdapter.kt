@@ -1,4 +1,3 @@
-
 package com.group1.pocketbudget
 
 import android.util.Log
@@ -6,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.pocketbudget.databinding.ItemExpenseBinding
-import java.util.Locale //locale specific 4matting yay
+import java.util.Locale
 
+// RTGONDWE, Jubie: RecyclerView adapter that binds our list of expenses to card views
 class ExpensesAdapter(
     private val items: List<Expense>,
     private val onClick: (Expense) -> Unit,
@@ -18,6 +18,7 @@ class ExpensesAdapter(
         val binding: ItemExpenseBinding
     ) : RecyclerView.ViewHolder(binding.root)
 
+    // inflates the item_expense card layout and logs each ViewHolder creation for lab 6. total slay
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -34,6 +35,7 @@ class ExpensesAdapter(
         return ViewHolder(binding)
     }
 
+    // binds expense titles, formatted kwacha amounts, category tags, and click listeners to each card view
     override fun onBindViewHolder(
         holder: ViewHolder,
         position: Int
@@ -78,5 +80,6 @@ class ExpensesAdapter(
         }
     }
 
+    // returns the total count of items in the adapter list. keeping it chill :)
     override fun getItemCount(): Int = items.size
 }
