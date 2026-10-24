@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.group1.pocketbudget.databinding.ItemExpenseBinding
+import java.util.Locale //locale specific 4matting yay
 
 class ExpensesAdapter(
     private val items: List<Expense>,
@@ -59,7 +60,7 @@ class ExpensesAdapter(
 
         // Display the expense amount
         holder.binding.cardAmount.text =
-            "MWK ${"%.2f".format(expense.amount)}"
+            String.format(Locale.US, "MWK %,.2f", expense.amount)
 
         // Display the note, or a default message if it is empty
         holder.binding.cardBody.text =

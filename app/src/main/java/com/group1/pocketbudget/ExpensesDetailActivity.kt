@@ -63,7 +63,7 @@ class ExpensesDetailActivity : AppCompatActivity() {
 
             val shareText = String.format(
                 Locale.getDefault(),
-                "%s: %.2f (%s%s)\n%s",
+                "%s: MWK %,.2f (%s%s)\n%s",
                 title,
                 amount,
                 category,
