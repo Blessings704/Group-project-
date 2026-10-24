@@ -1,4 +1,3 @@
-
 package com.group1.pocketbudget
 
 import android.content.Context
@@ -6,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+// harrybanda200, PfabyGo: abstract RoomDatabase class that builds our SQLite database. good vibes only :)
 @Database(
     entities = [Expense::class],
     version = 1,
@@ -20,6 +20,7 @@ abstract class ExpenseDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: ExpenseDatabase? = null
 
+        // builds the database or returns the existing instance so we stay locked in
         fun getDatabase(context: Context): ExpenseDatabase {
             return INSTANCE ?: synchronized(this) {
 

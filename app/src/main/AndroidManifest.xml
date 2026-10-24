@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Blessings, Trevor: AndroidManifest declaring app activities and launcher intent filter -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Blessings, Trevor: main application configuration node -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,6 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PocketBudget">
+
+        <!-- Blessings, Trevor: MainActivity declaration with the main launcher intent filter -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -22,6 +26,7 @@
             </intent-filter>
         </activity>
 
+        <!-- Leah Lusinje, Oscar: ExpensesDetailActivity declaration -->
         <activity
             android:name=".ExpensesDetailActivity"
             android:exported="false" />

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Fyaupi Mwenelupembe, Rita Makanjira: string resources file holding app text and format strings -->
 <resources>
     <!-- App name -->
     <string name="app_name">Pocket Budget</string>
@@ -15,7 +16,7 @@
     <string name="error_bad_amount">Enter an amount above zero</string>
 
     <!-- Saved expense message -->
-    <string name="saved_format">Saved: %1$s · %2$.2f</string>
+    <string name="saved_format">Saved: %1$s · MWK %2$,.2f</string>
 
     <!-- Lab 2: Categories -->
     <string name="category_food">Food</string>
@@ -31,16 +32,16 @@
     <string name="category_changed">Category: %1$s</string>
 
     <!-- Expense summary -->
-    <string name="summary_format">%1$s · %2$s · %3$.2f</string>
+    <string name="summary_format">%1$s · %2$s · MWK %3$,.2f</string>
     <string name="essential_tag">ESSENTIAL</string>
 
     <!-- Lab 3: Session total -->
-    <string name="session_total_initial">Spent this session: 0.00</string>
-    <string name="session_total_format">Spent this session: %1$.2f</string>
+    <string name="session_total_initial">Spent this session: MWK 0.00</string>
+    <string name="session_total_format">Spent this session: MWK %1$,.2f</string>
 
     <!-- Lab 7: All-time total -->
-    <string name="all_time_total_initial">All-time total: 0.00</string>
-    <string name="all_time_total_format">All-time total: %1$.2f</string>
+    <string name="all_time_total_initial">All-time total: MWK 0.00</string>
+    <string name="all_time_total_format">All-time total: MWK %1$,.2f</string>
 
     <!-- Expense card labels -->
     <string name="flag_essential">Essential</string>
@@ -49,7 +50,7 @@
 
     <!-- Lab 5: Detail activity and review results -->
     <string name="detail_category_format">Category: %1$s</string>
-    <string name="detail_amount_format">Amount: MWK %1$.2f</string>
+    <string name="detail_amount_format">Amount: MWK %1$,.2f</string>
     <string name="detail_notes_format">Notes: %1$s</string>
     <string name="no_notes">None</string>
     <string name="essential_expense">Essential Expense</string>
