@@ -19,7 +19,7 @@
             android:id="@+id/descriptionInput"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="90dp"
             android:hint="@string/description_hint"
             android:inputType="textCapSentences"
             android:minHeight="48dp"
